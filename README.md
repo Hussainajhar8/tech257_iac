@@ -70,5 +70,47 @@ To set up Ansible on AWS, follow these steps:
 7. **Execute Commands:**
    - Now, commands can be executed from the controller to the group (of agent nodes), such as the "web" group.
   ![alt text](img/image-9.png)
-   - If we do an `ls -a to` the agent node we can see it has the `.ansible` directory which it received from the controller node presumably when we did the ping command.
+   - If we do an `ls -a` to the agent node we can see it has the `.ansible` directory which it received from the controller node presumably when we did the ping command.
   ![alt text](img/image-10.png)
+
+8. **Copy SSH Key from Controller to Agent Node:**
+   - Run the following Ansible command to copy the SSH key:
+     ```bash
+     sudo ansible web -m ansible.builtin.copy -a "src=~/.ssh/tech257.pem dest=~/.ssh"
+     ```
+     ![alt text](img/image-11.png)
+   - After executing the command, verify that the `tech257.pem` file is present on the agent node, indicating successful key transfer.
+  ![alt text](img/image-12.png)
+
+# Running Playbooks with Ansible
+
+1. **Create and Run Playbook:**
+   - Create a playbook in yaml that includes tasks to perform various actions, such as installing dependencies, cloning the app folder, and starting the application. Here we are just installing nginx on the agent node.
+  ![alt text](img/image-13.png)
+   - Run the playbook using Ansible to execute the tasks on the agent node with `sudo ansible-playbook <file_name.yaml>`
+  ![alt text](img/image-14.png)
+
+2. **Confirm Playbook Execution:**
+   - After running the playbook, ensure that it executes without issues.
+   - Use an adhoc command like `sudo ansible web -a "systemctl status nginx"` to verify that services are active and running as expected.
+   ![alt text](img/image-15.png)
+
+3. **Check IP:**
+   - Open port 80 on the security group to access the default webpage from the application's public IP.
+   ![alt text](img/image-16.png)
+
+4. **Create a Playbook for Application Deployment:**
+    - Tasks include:
+      - Installing Node.js
+      - Cloning the app folder
+      - Installing npm and pm2
+      - Starting the application
+  ![alt text](img/image-17.png)
+
+5. **Run the Playbook and Confirm Application Deployment:**
+     - Execute the playbook to automate the deployment process.
+    ![alt text](img/image-18.png)
+     - Verify that the application is running on the IP address, ensuring that port 3000 is opened.
+    ![alt text](img/image-19.png)
+
+We have successfully deployed our application using ansible playbooks.
