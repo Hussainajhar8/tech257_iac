@@ -198,25 +198,25 @@ We have successfully deployed our application using ansible playbooks.
 # instructions: tasks to install nginx in agent node
   tasks:
   - name: configure/install nodejs on the agent node
-   shell: curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs
+    shell: curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs
 
   - name: install git
    apt:
           name: git
 
   - name: clone git repo
-   shell: git clone https://github.com/Hussainajhar8/tech257_cicd_app.git
+    shell: git clone https://github.com/Hussainajhar8/tech257_cicd_app.git
    args:
        creates: tech257_cicd_app/
 
   - name: move to app directory
-   shell: cd tech257_cicd_app/repo/app/
+    shell: cd tech257_cicd_app/repo/app/
 
   - name: add a reverse proxy
-   shell: sudo sed -i '51s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
+    shell: sudo sed -i '51s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
 
   - name: reload nginx
-   shell: sudo systemctl reload nginx
+    shell: sudo systemctl reload nginx
 
     #- name: configure db_host
     #shell: |
@@ -224,10 +224,10 @@ We have successfully deployed our application using ansible playbooks.
     #   source ~/.bashrc
 
   - name: Set environment variable for this task
-   ansible.builtin.shell: "export DB_HOST=mongodb://34.245.74.116:27017/posts"
+    ansible.builtin.shell: "export DB_HOST=mongodb://34.245.74.116:27017/posts"
 
   - name: install npm and pm2
-   shell: |
+    shell: |
        sudo npm install
        sudo npm install pm2@latest -g
        pm2 kill
@@ -235,7 +235,7 @@ We have successfully deployed our application using ansible playbooks.
        pm2 save
 
   - name: Seed the database
-   shell: node seeds/seed.js
+    shell: node seeds/seed.js
 ```
 
 
