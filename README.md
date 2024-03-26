@@ -226,9 +226,6 @@ We have successfully deployed our application using ansible playbooks.
          - name: Set environment variable for this task
            ansible.builtin.shell: "export DB_HOST=mongodb://34.245.74.116:27017/posts"
 
-         - name: Seed the database
-           shell: node seeds/seed.js
-
          - name: install npm and pm2
            shell: |
                sudo npm install
@@ -236,6 +233,9 @@ We have successfully deployed our application using ansible playbooks.
                pm2 kill
                pm2 start app.js
                pm2 save
+
+         - name: Seed the database
+           shell: node seeds/seed.js
 ```
 
 
@@ -245,7 +245,7 @@ We have successfully deployed our application using ansible playbooks.
 ---
 
 # where would you like to install the db
-- hosts:  db
+- hosts: db
 
 # logs required
   gather_facts:  yes
