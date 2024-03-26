@@ -201,12 +201,12 @@ We have successfully deployed our application using ansible playbooks.
     shell: curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs
 
   - name: install git
-   apt:
+    apt:
           name: git
 
   - name: clone git repo
     shell: git clone https://github.com/Hussainajhar8/tech257_cicd_app.git
-   args:
+    args:
        creates: tech257_cicd_app/
 
   - name: move to app directory
