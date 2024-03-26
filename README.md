@@ -171,13 +171,13 @@ We have successfully deployed our application using ansible playbooks.
 
 
 # would you like to see the logs?
-gather_facts: yes
+  gather_facts: yes
 
 # provide admin access to this playbook - use sudo
-become: true
+  become: true
 
 # instructions: tasks to install nginx in agent node
-tasks:
+  tasks:
    - name: configure/install nginx on the agent node
       apt: pkg=nginx state=present
 ```
@@ -189,13 +189,13 @@ tasks:
 
 
 # would you like to see the logs?
-gather_facts: yes
+  gather_facts: yes
 
 # provide admin access to this playbook - use sudo
-become: true
+  become: true
 
 # instructions: tasks to install nginx in agent node
-tasks:
+  tasks:
          - name: configure/install nodejs on the agent node
             shell: curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs
 
@@ -247,13 +247,13 @@ tasks:
 - hosts:  db
 
 # logs required
-gather_facts:  yes
+  gather_facts:  yes
 
 # allow admin access
-become: true
+  become: true
 
 # add the instructions tasks
-tasks:
+  tasks:
     - name:  installing Mongodb in the db server
       apt:  pkg=mongodb state=present
 
