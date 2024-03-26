@@ -179,11 +179,12 @@ We have successfully deployed our application using ansible playbooks.
 # instructions: tasks to install nginx in agent node
   tasks:
    - name: configure/install nginx on the agent node
-      apt: pkg=nginx state=present
+     apt: pkg=nginx state=present
 ```
 
 ```bash
 # The final configure_nodejs.yaml file   
+---
 # where do you want to install or run this playbook?
 - hosts: web
 
@@ -200,7 +201,7 @@ We have successfully deployed our application using ansible playbooks.
             shell: curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs
 
          - name: install git
-            apt:
+           apt:
                   name: git
 
          - name: clone git repo
