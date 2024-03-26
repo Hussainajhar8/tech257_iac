@@ -178,8 +178,8 @@ We have successfully deployed our application using ansible playbooks.
 
 # instructions: tasks to install nginx in agent node
   tasks:
-   - name: configure/install nginx on the agent node
-     apt: pkg=nginx state=present
+  - name: configure/install nginx on the agent node
+    apt: pkg=nginx state=present
 ```
 
 ```bash
@@ -197,45 +197,45 @@ We have successfully deployed our application using ansible playbooks.
 
 # instructions: tasks to install nginx in agent node
   tasks:
-         - name: configure/install nodejs on the agent node
-           shell: curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs
+  - name: configure/install nodejs on the agent node
+   shell: curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install -y nodejs
 
-         - name: install git
-           apt:
-                  name: git
+  - name: install git
+   apt:
+          name: git
 
-         - name: clone git repo
-           shell: git clone https://github.com/Hussainajhar8/tech257_cicd_app.git
-           args:
-               creates: tech257_cicd_app/
+  - name: clone git repo
+   shell: git clone https://github.com/Hussainajhar8/tech257_cicd_app.git
+   args:
+       creates: tech257_cicd_app/
 
-         - name: move to app directory
-           shell: cd tech257_cicd_app/repo/app/
+  - name: move to app directory
+   shell: cd tech257_cicd_app/repo/app/
 
-         - name: add a reverse proxy
-           shell: sudo sed -i '51s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
+  - name: add a reverse proxy
+   shell: sudo sed -i '51s/.*/                proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
 
-         - name: reload nginx
-           shell: sudo systemctl reload nginx
+  - name: reload nginx
+   shell: sudo systemctl reload nginx
 
-            #- name: configure db_host
-            #shell: |
-            #   echo 'export DB_HOST=mongodb:// 34.245.74.116:27017/posts' >> ~/.bashrc
-            #   source ~/.bashrc
+    #- name: configure db_host
+    #shell: |
+    #   echo 'export DB_HOST=mongodb:// 34.245.74.116:27017/posts' >> ~/.bashrc
+    #   source ~/.bashrc
 
-         - name: Set environment variable for this task
-           ansible.builtin.shell: "export DB_HOST=mongodb://34.245.74.116:27017/posts"
+  - name: Set environment variable for this task
+   ansible.builtin.shell: "export DB_HOST=mongodb://34.245.74.116:27017/posts"
 
-         - name: install npm and pm2
-           shell: |
-               sudo npm install
-               sudo npm install pm2@latest -g
-               pm2 kill
-               pm2 start app.js
-               pm2 save
+  - name: install npm and pm2
+   shell: |
+       sudo npm install
+       sudo npm install pm2@latest -g
+       pm2 kill
+       pm2 start app.js
+       pm2 save
 
-         - name: Seed the database
-           shell: node seeds/seed.js
+  - name: Seed the database
+   shell: node seeds/seed.js
 ```
 
 
@@ -255,15 +255,14 @@ We have successfully deployed our application using ansible playbooks.
 
 # add the instructions tasks
   tasks:
-    - name:  installing Mongodb in the db server
-      apt:  pkg=mongodb state=present
+  - name:  installing Mongodb in the db server
+    apt:  pkg=mongodb state=present
 
-    - name: configure mongodb bindip and port
-      shell: sed -i '11s/.*/bind_ip = 0.0.0.0/; 12s/.*/port = 27017/' /etc/mongodb.conf
+  - name: configure mongodb bindip and port
+    shell: sed -i '11s/.*/bind_ip = 0.0.0.0/; 12s/.*/port = 27017/' /etc/mongodb.conf
 
-    - name: restart mongodb
-      service:
-        name: mongodb
-        state: restarted
-
+  - name: restart mongodb
+    service:
+      name: mongodb
+      state: restarted
 ```
