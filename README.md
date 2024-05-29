@@ -90,14 +90,6 @@ To set up Ansible on AWS, follow these steps:
    - Run the playbook using Ansible to execute the tasks on the agent node with `sudo ansible-playbook <file_name.yaml>`
   ![alt text](img/image-14.png)
 
-5. **Run the Playbook and Confirm Application Deployment:**
-     - Execute the playbook to automate the deployment process.
-    ![alt text](img/image-18.png)
-     - Verify that the application is running on the IP address, ensuring that port 3000 is opened.
-    ![alt text](img/image-19.png)
-
-We have successfully deployed our application using ansible playbooks.
-
 2. **Confirm Playbook Execution:**
    - After running the playbook, ensure that it executes without issues.
    - Use an adhoc command like `sudo ansible web -a "systemctl status nginx"` to verify that services are active and running as expected.
